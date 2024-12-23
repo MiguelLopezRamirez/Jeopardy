@@ -1,13 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GameContext } from './GameContext';
 import './Leaderboard.css'; // Importa el archivo CSS
 
 const Leaderboard = () => {
-  const { teams } = useContext(GameContext);
+  const { teams, playCongratulationsSound } = useContext(GameContext);
 
   // Asegurarse de que los equipos están ordenados por su puntuación (de mayor a menor)
   const sortedTeams = [...teams].sort((a, b) => b.score - a.score);
-
+  useEffect( () => {
+    playCongratulationsSound()
+  })
   return (
     <div className="leaderboard-container">
       <h2 className="leaderboard-title">Resultados</h2>
