@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './TeamSetup.css'; // Importa el archivo CSS
 
 const TeamSetup = ({ onTeamsConfigured }) => {
   const [teamCount, setTeamCount] = useState(2); // Default to 2 teams
@@ -11,7 +12,7 @@ const TeamSetup = ({ onTeamsConfigured }) => {
       const newNames = [...prevNames];
       if (count > prevNames.length) {
         for (let i = prevNames.length; i < count; i++) {
-          newNames.push(`Team ${i + 1}`);
+          newNames.push(`Equipo ${i + 1}`);
         }
       } else {
         newNames.length = count;
@@ -35,40 +36,41 @@ const TeamSetup = ({ onTeamsConfigured }) => {
   };
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h1>Team Setup</h1>
+    <div className="team-setup-container">
+      <h1 className="team-setup-title">Configuración de Equipos</h1>
 
-      <label htmlFor="team-count">Number of Teams: </label>
-      <input
-        id="team-count"
-        type="number"
-        value={teamCount}
-        onChange={handleTeamCountChange}
-        min={2}
-        max={10}
-        style={{ width: '50px', marginLeft: '10px' }}
-      />
+      <div className="team-count-container">
+        <label htmlFor="team-count" className="team-label">Número de equipos:</label>
+        <input
+          id="team-count"
+          type="number"
+          value={teamCount}
+          onChange={handleTeamCountChange}
+          min={2}
+          max={10}
+          className="team-input"
+        />
+      </div>
 
-      <div style={{ marginTop: '20px' }}>
+      <div className="team-names-container">
         {teamNames.map((name, index) => (
-          <div key={index} style={{ marginBottom: '10px' }}>
-            <label htmlFor={`team-name-${index}`}>Team {index + 1} Name: </label>
+          <div key={index} className="team-name-row">
+            <label htmlFor={`team-name-${index}`} className="team-label">
+              Equipo {index + 1} Nombre:
+            </label>
             <input
               id={`team-name-${index}`}
               type="text"
               value={name}
               onChange={(event) => handleNameChange(index, event)}
-              style={{ marginLeft: '10px' }}
+              className="team-input"
             />
           </div>
         ))}
       </div>
 
-      <button
-        onClick={handleSubmit}
-        style={{ marginTop: '20px', padding: '10px 20px', cursor: 'pointer' }}
-      >
-        Start Game
+      <button onClick={handleSubmit} className="team-setup-button">
+        Iniciar Juegos
       </button>
     </div>
   );
